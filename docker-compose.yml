@@ -1,0 +1,23 @@
+version: '3'
+services:
+  express-server:
+    build:
+      context: ./BACK
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: express-server
+    volumes:
+      - ./BACK:/usr/src/app/api
+      - /usr/src/app/api/node_modules
+  # Client app definition
+  client: 
+    build: 
+      context: ./FRONT
+      dockerfile: Dockerfile
+    ports:
+      - "4201:4201"
+    container_name: client-angular
+    volumes:
+      - ./FRONT:/usr/src/app/ui
+      - /usr/src/app/ui/node_modules
