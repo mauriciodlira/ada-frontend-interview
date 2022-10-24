@@ -1,16 +1,15 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BASE_URL } from './configs/config-tokens';
-import { ColumnComponent } from './shared/components/column/column.component';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { AuthenticationInterceptor } from './core/interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +17,7 @@ import { ColumnComponent } from './shared/components/column/column.component';
     AppRoutingModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
