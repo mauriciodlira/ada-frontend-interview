@@ -2,12 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Kanban</title>
+  <title>Ada Kanban</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="icon" type="image/png" href="/icon.png"> 
 </head>
 <body>
-  <app-root></app-root>
+  <noscript>
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .noscript-content-center {
+        background-color: #0f1110;
+        color: #a9dd97;
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+      .noscript-content {
+        font-family: sans-serif;
+        font-size: 1.2rem;
+      }
+    </style>
+    <div class="noscript-content noscript-content-center">
+      <img src="/icon.png" alt="Ada Kanban - Logo" style="filter: drop-shadow(0px 2px 3px #d9ead470)">
+      <h1>Oh, não! :(</h1>
+      <p>Se você está vendo essa mensagem, é porque seu navegador deve estar com o <em>Javascript</em> desabilitado.</p>
+      <p>Para utilizar esta aplicação, por favor habilite o <em>Javascript</em> de seu navegador e atualize a página.</p>
+      <hr style="width: 80vw; color: #d9ead470">
+    </div>
+  </noscript>
+  <ada-root class="h-100 px-5 py-3"></ada-root>
 </body>
 </html>

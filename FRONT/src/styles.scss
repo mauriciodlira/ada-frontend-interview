@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@use "assets/styles/variables";
+@import "bootstrap/scss/bootstrap";
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-xs {
+    font-size: 0.35em;
+}
