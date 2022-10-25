@@ -1,3 +1,11 @@
-<h1>Hello world</h1>
-<button (click)="loadCards()">req</button>
-<router-outlet></router-outlet>
+<div class="h-100 d-flex flex-column">
+    <header>
+        topo
+    </header>
+    <section class="flex-grow-1">
+        <router-outlet></router-outlet>
+    </section>
+    <footer>
+        2022 - Maurício de Lira <a href="https://github.com/mauriciodlira/ada-frontend-interview" rel="noreferrer" target="_blank">(github)</a>
+    </footer>
+</div>
