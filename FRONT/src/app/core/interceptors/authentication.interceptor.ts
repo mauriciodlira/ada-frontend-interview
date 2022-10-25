@@ -5,7 +5,7 @@ import { IdentityService } from '../services/identity.service';
 
 export const HEADER_IGNORE_INTERCEPTOR = 'X-No-Auth';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
 
   constructor(

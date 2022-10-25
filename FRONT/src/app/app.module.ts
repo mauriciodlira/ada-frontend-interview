@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { AuthenticationInterceptor } from './core/interceptors/authentication.interceptor';
+import { DefaultHeadersInterceptor } from './core/interceptors/default-headers.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { AuthenticationInterceptor } from './core/interceptors/authentication.in
     AppRoutingModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: DefaultHeadersInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

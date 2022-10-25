@@ -17,26 +17,21 @@ export class CardManagementService {
     return this.apiService.get<CardModel[]>('cards');
   }
 
-  createCard(title: string, content: string, state: CardStatesEnum): Observable<CardModel[]> {
-    const payload: CardCreatePayload = {
-      conteudo: content,
-      titulo: title,
-      lista: state.toString(),
+  createCard(payload: CardCreatePayload): Observable<CardModel[]> {
+    const p: CardCreatePayload = {
+      conteudo: payload.conteudo,
+      titulo: payload.titulo,
+      lista: CardStatesEnum.ToDo,
     };
 
     return this.apiService.post<CardModel[], CardCreatePayload>(
       'cards',
-      payload,
+      p,
     );
   }
 
-  updateCard(cardId: string, title: string, content: string, state: CardStatesEnum): Observable<CardModel> {
-    const payload: CardUpdatePayload = {
-      id: cardId,
-      conteudo: content,
-      lista: state.toString(),
-      titulo: title,
-    }
+  updateCard(payload: CardUpdatePayload): Observable<CardModel> {
+    const cardId = payload.id;
 
     return this.apiService.put<CardModel, CardUpdatePayload>(
       `cards/${cardId}`,
