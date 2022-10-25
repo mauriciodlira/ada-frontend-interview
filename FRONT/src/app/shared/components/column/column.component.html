@@ -1,1 +1,24 @@
-<p>column works!</p>
+<section>
+    <h2 class="column--title">
+        {{state}}
+        <span class="badge bg-secondary text-xs" [title]="cards.length + ' item(ns) nesta coluna'">
+            {{cards.length}}
+        </span>
+    </h2>
+
+    <div>
+        <ng-container *ngIf="cards.length > 0; else tplEmptyColumn">
+            <ada-card *ngFor="let c of cards" [cardModel]="c" (create)="createCard($event)"
+                (update)="updateCard($event)" (delete)="deleteCard($event)">
+            </ada-card>
+        </ng-container>
+    </div>
+</section>
+
+<ng-template #tplEmptyColumn>
+    Nada a exibir
+</ng-template>
+
+<ng-template #tplColumnNew>
+
+</ng-template>

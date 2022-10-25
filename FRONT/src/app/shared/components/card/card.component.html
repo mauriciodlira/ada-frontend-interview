@@ -1,1 +1,71 @@
-<p>card works!</p>
+<!--
+    Este componente de cartão deve ter o seguinte comportamento:
+    . Se possuir CardModel, inicia em Visualizar
+    . Se possuir CardModel, no modo Editar vem com as informações pré-preenchidas
+    . Se não possui CardModel, inicia em Editar com as informações vazias
+-->
+<ng-container *ngIf="cardModel; else tplCreateCard" [ngTemplateOutlet]="tplSkeleton">
+</ng-container>
+
+<!-- Criar -->
+<ng-template #tplCreateCard>
+    <div class="card" *ngIf="!!formGroup">
+        <div class="card-body">
+            <form [formGroup]="formGroup">
+                <span class="card-title d-flex align-items-center">
+                    <label for="cardTitle" class="visually-hidden">Título</label>
+                    <input type="text" [formControlName]="'title'" id="cardTitle" class="form-control" placeholder="Título">
+                </span>
+                <span class="form-text">
+                    <label for="cardContent" class="form-label">Conteúdo</label>
+                    <textarea id="cardContent" [formControlName]="'content'" class="form-control">
+                    </textarea>
+                </span>
+            </form>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" title="Criar" [disabled]="formGroup.invalid" (click)="createClick()">Criar</button>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Editar -->
+<ng-template #tplEditCard let-model="model">
+    <div class="card">
+        <div class="card-body" *ngIf="!!formGroup">
+            <form [formGroup]="formGroup">
+                <span class="card-title d-flex align-items-center">
+                    <input type="text" [formControlName]="'title'" id="cardTitle">
+                </span>
+                <textarea [formControlName]="'content'" class="card-text">
+                </textarea>
+            </form>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-secondary" title="Cancelar">Cancelar</button>
+            <button type="button" class="btn btn-primary" title="Criar">Criar</button>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Visualizar -->
+<ng-template #tplSkeleton>
+    <div class="card" *ngIf="cardModel!">
+        <div class="card-body">
+            <span class="card-title d-flex align-items-center">
+                <h3 class="flex-grow-1">{{cardModel.titulo}}</h3>
+                <button type="button" class="btn-close" title="Excluir cartão" aria-label="Excluir cartão" (click)="deleteClick()"></button>
+            </span>
+
+            <p class="card-text">{{cardModel.conteudo}}</p> <!-- TODO acrescentar markdown aqui -->
+        </div>
+        <div class="card-footer d-flex">
+            <button *ngIf="canMoveBack" type="button" class="btn btn-secondary align-self-start" title="Mover para coluna anterior" (click)="moveTo('PREV')">&lt;</button>
+
+            <!-- content projection slot to have either discard/save, or edit button-->
+            <ng-content select="[actionButton]"></ng-content>
+
+            <button *ngIf="canMoveNext" type="button" class="btn btn-secondary align-self-end" title="Mover para próxima coluna" (click)="moveTo('NEXT')">&gt;</button>
+        </div>
+    </div>
+</ng-template>
